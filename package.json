@@ -1,0 +1,21 @@
+{
+    "name": "phantomizer-grunt",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Grunt support for phantomizer",
+    "keywords": "",
+    "bugs": {
+        "url" : "http://github.com/maboiteaspam/phantomizer-grunt/issues",
+        "email" : "none@host.com"
+    },
+    "license" : "mit",
+    "repository" :{
+        "type" : "git",
+        "url" : "http://github.com/maboiteaspam/phantomizer-grunt.git"
+    },
+    "dependencies": {
+        "grunt": "0.4.x"
+    },
+    "devDependencies": {
+    }
+}
