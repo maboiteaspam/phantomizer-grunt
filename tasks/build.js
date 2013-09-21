@@ -26,8 +26,9 @@ module.exports = function(grunt) {
 
         for(var out_file in copy ){
             var in_file = copy[out_file];
-            grunt.file.copy(in_file, out_file);
+            grunt.log.ok("Copied from "+in_file);
             grunt.log.ok("Copied to "+out_file);
+            grunt.file.copy(in_file, out_file);
         }
 
         for(var out_file in meta_merge ){
@@ -46,8 +47,8 @@ module.exports = function(grunt) {
                     meta_merged["dependences"].push( meta_obj["dependences"][t] );
                 }
             }
+            grunt.log.ok("Meta Merged to "+meta_dir+out_file);
             grunt.file.write(meta_dir+out_file, JSON.stringify(meta_merged, null, 4));
-            grunt.log.ok("Merged to "+out_file);
         }
 
         grunt.log.ok()
