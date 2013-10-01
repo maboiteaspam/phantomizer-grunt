@@ -18,12 +18,26 @@ module.exports = function(grunt) {
         var options = this.options({
             "copy":{}
             ,"meta_merge":{}
+            ,"file_merge":{}
         });
         grunt.verbose.writeflags(options, 'Options');
-        var copy = options.copy;
-        var meta_dir = options.meta_dir;
-        var meta_merge = options.meta_merge;
 
+        var meta_dir = options.meta_dir;
+
+        var copy        = options.copy;
+        var file_merge  = options.file_merge;
+        var meta_merge  = options.meta_merge;
+
+        for(var out_file in file_merge ){
+            var in_files = file_merge[out_file];
+            var content = "";
+            for( var n in in_files ){
+                content += grunt.file.read(in_files[n]);
+            }
+            grunt.log.ok("Merged ", in_files);
+            grunt.log.ok("Merged to "+out_file);
+            grunt.file.write(out_file, content);
+        }
         for(var out_file in copy ){
             var in_file = copy[out_file];
             grunt.log.ok("Copied from "+in_file);
