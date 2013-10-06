@@ -14,7 +14,8 @@
         "url" : "http://github.com/maboiteaspam/phantomizer-grunt.git"
     },
     "dependencies": {
-        "grunt": "0.4.x"
+        "grunt": "0.4.x",
+        "phantomizer-libutil": "maboiteaspam/phantomizer-libutil"
     },
     "devDependencies": {
     }
