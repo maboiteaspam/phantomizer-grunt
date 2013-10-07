@@ -21,6 +21,7 @@ module.exports = function(grunt) {
     });
     grunt.registerMultiTask("phantomizer-finalizer", "Finalizer task helper", function(){
 
+
         var ph_libutil = require("phantomizer-libutil");
         var meta_factory = ph_libutil.meta;
 
@@ -38,7 +39,6 @@ module.exports = function(grunt) {
         var meta_dir    = options.meta_dir;
 
         var meta_manager = new meta_factory( process.cwd(), meta_dir );
-
 
         for(var out_file in file_merge ){
             var in_files = file_merge[out_file];
