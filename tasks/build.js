@@ -72,8 +72,7 @@ module.exports = function(grunt) {
                 grunt.log.ok("Meta Merged\n\t"+in_files[n]);
             }
             grunt.log.ok("Done\n\t"+out_file);
-            meta_merged.save(meta_dir+out_file);
-            grunt.file.write(meta_dir+out_file, JSON.stringify(meta_merged, null, 4));
+            meta_merged.save(out_file);
         }
 
         grunt.log.ok()
