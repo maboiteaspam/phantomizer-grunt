@@ -5,18 +5,17 @@
     "description": "Grunt support for phantomizer",
     "keywords": "",
     "bugs": {
-        "url" : "http://github.com/maboiteaspam/phantomizer-grunt/issues",
-        "email" : "none@host.com"
+        "url": "http://github.com/maboiteaspam/phantomizer-grunt/issues",
+        "email": "none@host.com"
     },
-    "license" : "mit",
-    "repository" :{
-        "type" : "git",
-        "url" : "http://github.com/maboiteaspam/phantomizer-grunt.git"
+    "license": "mit",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/maboiteaspam/phantomizer-grunt.git"
     },
     "dependencies": {
         "grunt": "0.4.x",
-        "phantomizer-libutil": "maboiteaspam/phantomizer-libutil"
+        "phantomizer-libutil": "maboiteaspam/maboiteaspam/maboiteaspam/phantomizer-libutil#010b357"
     },
-    "devDependencies": {
-    }
+    "devDependencies": {}
 }
