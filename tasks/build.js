@@ -8,17 +8,7 @@ module.exports = function(grunt) {
             done();
         },delay?delay:100);
     });
-    grunt.registerTask("loader_builder", "Builds a loader builder script jit", function(task_file, task, args_n, args_nn, args_nnn){
-        var done = this.async();
-        var options = grunt.file.readJSON(task_file);
-        grunt.config.init(options);
-        grunt.config.set(task, options[task]);
-        var build_cmd = this.nameArgs;
-        build_cmd = build_cmd.substring("loader_builder:".length);
-        build_cmd = build_cmd.substring((task_file+":").length);
-        grunt.task.run(build_cmd);
-        done();
-    });
+
     grunt.registerMultiTask("phantomizer-finalizer", "Finalizer task helper", function(){
 
 
