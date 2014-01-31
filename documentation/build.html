@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>build.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>build.js</h1>
+        
+
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
+
+module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(grunt)</span> {</span></pre></div>
+        
+      
+        
+        
+        
+          <div class='highlight'><pre>    grunt.registerTask(<span class="hljs-string">"throttle"</span>, <span class="hljs-string">"Builds a loader builder script jit"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(delay)</span>{</span>
+        <span class="hljs-keyword">var</span> done = <span class="hljs-keyword">this</span>.async();
+        setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+            done();
+        },delay?delay:<span class="hljs-number">100</span>);
+    });
+
+    grunt.registerMultiTask(<span class="hljs-string">"phantomizer-finalizer"</span>, <span class="hljs-string">"Finalizer task helper"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+
+
+        <span class="hljs-keyword">var</span> ph_libutil = <span class="hljs-built_in">require</span>(<span class="hljs-string">"phantomizer-libutil"</span>);
+        <span class="hljs-keyword">var</span> meta_factory = ph_libutil.meta;</pre></div>
+        
+      
+        
+        <p>-</p>
+
+        
+          <div class='highlight'><pre>        <span class="hljs-keyword">var</span> options = <span class="hljs-keyword">this</span>.options({
+            <span class="hljs-string">"copy"</span>:{}
+            ,<span class="hljs-string">"meta_merge"</span>:{}
+            ,<span class="hljs-string">"file_merge"</span>:{}
+        });
+        grunt.verbose.writeflags(options, <span class="hljs-string">'Options'</span>);
+
+        <span class="hljs-keyword">var</span> copy        = options.copy;
+        <span class="hljs-keyword">var</span> file_merge  = options.file_merge;
+        <span class="hljs-keyword">var</span> meta_merge  = options.meta_merge;
+        <span class="hljs-keyword">var</span> meta_dir    = options.meta_dir;
+
+        <span class="hljs-keyword">var</span> meta_manager = <span class="hljs-keyword">new</span> meta_factory( process.cwd(), meta_dir );
+
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> out_file <span class="hljs-keyword">in</span> file_merge ){
+            <span class="hljs-keyword">var</span> in_files = file_merge[out_file];
+            <span class="hljs-keyword">var</span> content = <span class="hljs-string">""</span>;
+            <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> in_files ){
+                content += grunt.file.read(in_files[n]);
+                grunt.log.ok(<span class="hljs-string">"Merged\n\t"</span>, in_files[n]);
+            }
+            grunt.log.ok(<span class="hljs-string">"Merged to\n\t"</span>+out_file);
+            grunt.file.write(out_file, content);
+        }
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> out_file <span class="hljs-keyword">in</span> copy ){
+            <span class="hljs-keyword">var</span> in_file = copy[out_file];
+            grunt.log.ok(<span class="hljs-string">"Copied from\n\t"</span>+in_file);
+            grunt.log.ok(<span class="hljs-string">"Copied to\n\t"</span>+out_file);
+            grunt.file.copy(in_file, out_file);
+        }
+
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> out_file <span class="hljs-keyword">in</span> meta_merge ){
+            <span class="hljs-keyword">var</span> in_files = meta_merge[out_file];
+            <span class="hljs-keyword">var</span> meta_merged = meta_manager.create([]);
+            <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> in_files ){
+                <span class="hljs-keyword">var</span> meta_obj = meta_manager.load(in_files[n]);
+
+                <span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> task_name <span class="hljs-keyword">in</span> meta_obj[<span class="hljs-string">"tasks_opts"</span>] ){
+                    <span class="hljs-keyword">if</span>( meta_merged.has_task(task_name) == <span class="hljs-literal">false</span> ){
+                        meta_merged.require_task(task_name, meta_obj[<span class="hljs-string">"tasks_opts"</span>][task_name])
+                    }
+                }
+                meta_merged.load_dependencies(meta_obj[<span class="hljs-string">"dependences"</span>]);
+                grunt.log.ok(<span class="hljs-string">"Meta Merged\n\t"</span>+in_files[n]);
+            }
+            grunt.log.ok(<span class="hljs-string">"Done\n\t"</span>+out_file);
+            meta_merged.save(out_file);
+        }
+
+        grunt.log.ok()
+
+    });
+};</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
