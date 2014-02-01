@@ -3,8 +3,6 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
-        // end of testing options
         docco: {
             debug: {
                 src: [
@@ -26,29 +24,16 @@ module.exports = function(grunt) {
         },
         release: {
             options: {
-                // update the package json file version number or not
-                bump: true, //default: true
-                //file: 'component.json', //default: package.json
-                // it is actually git add command
-                add: false, //default: true
-                // it is actually git commit command
-                commit: false, //default: true
-                // git tag  command
-                // tag: false, //default: true
-                // git push  command
-                // push: false, //default: true
-                // pushTags: false, //default: true
-                npm: false, //default: true
-                // true will apply the version number as the tag
-                npmtag: true, //default: no tag
-                // folder: 'folder/to/publish/to/npm', //default project root
-                tagName: '<%= version %>', //default: '<%= version %>'
-                // commitMessage: 'release <%= version %>', //default: 'release <%= version %>'
-                //tagMessage: 'tagging version <%= version %>', //default: 'Version <%= version %>',
+                bump: true,
+                add: false,
+                commit: false,
+                npm: false,
+                npmtag: true,
+                tagName: '<%= version %>',
                 github: {
-                    repo: 'maboiteaspam/phantomizer-grunt', //put your user/repo here
-                    usernameVar: 'GITHUB_USERNAME', //ENVIRONMENT VARIABLE that contains Github username
-                    passwordVar: 'GITHUB_PASSWORD' //ENVIRONMENT VARIABLE that contains Github password
+                    repo: 'maboiteaspam/phantomizer-grunt',
+                    usernameVar: 'GITHUB_USERNAME',
+                    passwordVar: 'GITHUB_PASSWORD'
                 }
             }
         }
