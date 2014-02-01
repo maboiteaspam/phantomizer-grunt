@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         },delay?delay:100);
     });
 
-    // Finalizer tasks
+    // Finalizer task
     // -----------------
     // useful to have a enqueueable task
     // for merging, copying some one to many tasks results
