@@ -20,6 +20,10 @@ module.exports = function(grunt) {
         },delay?delay:100);
     });
 
+    // Finalizer tasks
+    // -----------------
+    // useful to have a enqueueable task
+    // for merging, copying some one to many tasks results
     grunt.registerMultiTask("phantomizer-finalizer", "Finalizer task helper", function(){
 
         // init default options
