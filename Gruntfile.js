@@ -6,7 +6,6 @@ module.exports = function(grunt) {
         docco: {
             debug: {
                 src: [
-                    'lib/htmlcompressor.js',
                     'tasks/build.js'
                 ],
                 options: {
