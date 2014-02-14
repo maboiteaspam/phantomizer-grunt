@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
 
     var ph_libutil = require("phantomizer-libutil");
-    var meta_factory = ph_libutil.meta;
 
 
     // Throttle task
@@ -38,7 +37,6 @@ module.exports = function(grunt) {
 
         grunt.verbose.writeflags(options, 'Options');
 
-
         // merge files
         // ------------
         var file_merge = options.file_merge;
@@ -68,7 +66,11 @@ module.exports = function(grunt) {
         // ------------
         // it copies all dependencies,
         // then copy all required tasks
-        var meta_manager = new meta_factory( process.cwd(), options.meta_dir );
+
+// get phantomizer main instance
+      var phantomizer = ph_libutil.get("main");
+      var meta_manager = phantomizer.get_meta_manager();
+
         var meta_merge = options.meta_merge;
         for(var out_file in meta_merge ){
             // create a new meta object
